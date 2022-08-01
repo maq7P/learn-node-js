@@ -37,3 +37,46 @@ setImmediate(() => {
     timerId.ref();
 })
 
+
+
+////////////////////////////////////////////////////////////////////////
+const fs = require("fs");
+
+console.log("INIT")
+
+setTimeout(() => {
+    console.log(performance.now(), "Timer 100")
+}, 100);
+
+setImmediate(() => {
+    console.log("Immediate")
+})
+
+//регистрируется в фазе poll и ждет прочтения
+fs.readFile(__filename, () => {
+    console.log("file readed")
+});
+
+//Заррегистрируетя в фазе таймеров, и сразу же приступит к к выполнению, так как 0
+//После выполения между фаз зарегистриуется Microtask промиса
+setTimeout(() => {
+   for (let i = 0; i < 1000000000; i++){}
+   console.log("done heavy");
+
+    Promise.resolve().then(() => {
+        console.log("Promise")
+    })
+
+}, 0);
+
+// Microtask происходять между каждой из фаз,
+Promise.resolve().then(() => {
+    console.log("Promise")
+})
+
+//Тики выполняются в приоритете, только потом Microtask
+process.nextTick(() => {
+    console.log("tick")
+})
+
+console.log("FINISH")

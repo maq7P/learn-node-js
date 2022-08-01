@@ -13,13 +13,21 @@
 ### Фазы EventLoop:
 
 - таймер - callback от запланированных таймеров 
+  // nextTick -> Microtask (Между фазами)
 - pending callbacks - callback от системы операций
+  // nextTick -> Microtask (Между фазами)
 - idle, prepare - внутреннее использоание
+  // nextTick -> Microtask (Между фазами)
 - poll - расчет времени и обработка событйи ввода/вывода (I/O)
+  // nextTick -> Microtask (Между фазами)
 - check - обработка setimmediate
+  // nextTick -> Microtask (Между фазами)
 - close callback - вызов событий "close", например сокеты
 
 (Между каждой фазой происходят события: proccess.nextTick() && other microtaskQueue)
 
 ![](../public/eventLoopPhases.png)
 
+
+### Переход от main thread к worker thread
+![](../public/threads.png)
