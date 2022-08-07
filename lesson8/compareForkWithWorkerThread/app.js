@@ -1,3 +1,4 @@
+const { readFileSync } = require("fs");
 const { performance, PerformanceObserver } = require("perf_hooks");
 
 const performanceObserver = new PerformanceObserver((items) => {
@@ -9,6 +10,8 @@ const performanceObserver = new PerformanceObserver((items) => {
 performanceObserver.observe({
     entryTypes: ["measure"]
 });
+const file = readFileSync("./text.txt");
+//const file = "";
 
 const workerFunction = (array) => {
     const {Worker} = require("worker_threads");
@@ -18,7 +21,7 @@ const workerFunction = (array) => {
 
         const worker = new Worker("./worker.js", {
             workerData: {
-                array,
+                array, file
             }
         });
 
@@ -42,7 +45,7 @@ const forkFunction = (array) => {
 
         const forkProcess = fork("fork.js");
 
-        forkProcess.send({ array })
+        forkProcess.send({ array, file })
         forkProcess.on("message", (msg) => {
             performance.mark("fork end");
             performance.measure("fork", "fork start", "fork end");
