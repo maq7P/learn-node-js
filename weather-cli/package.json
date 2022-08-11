@@ -10,7 +10,7 @@
     "cli",
     "weather"
   ],
-  "author": "",
+  "author": "Max",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2"
