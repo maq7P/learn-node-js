@@ -2,11 +2,11 @@ import dedent from "dedent-js";
 import { getColor } from "../helpers/colorHelper.js";
 
 const printError = (err) => {
-    console.log(getColor("red, "`ERROR: ${err}`));
+    console.log(getColor("red", `ERROR: ${err}`));
 }
 
 const printSuccess = (err) => {
-    console.log(getColor("green, "`ERROR: ${err}`));
+    console.log(getColor("green", `SUCCESS: ${err}`));
 }
 
 const printHelp = () => {
