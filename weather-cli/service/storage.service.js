@@ -16,10 +16,11 @@ export const saveKeyValue = async (key, value) => {
     await promises.writeFile(filePath, JSON.stringify(data));
 }
 
-const getKeyValue = async (key) => {
+export const getKeyValue = async (key) => {
     if(await isExsist(filePath)){
         const file = await promises.readFile(filePath);
-        data = JSON.parse(file);
+        const data = JSON.parse(file);
+        
         return data[key];
     }
 
