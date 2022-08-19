@@ -1,9 +1,8 @@
 import axios from "axios";
+
+import { WEATHER_URL } from "../constants/API.js";
 import { TOKEN_DICTIONARY } from "../constants/token.js";
 import { getKeyValue } from "./storage.service.js";
-
-const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
-
 
 export const getWeather = async (city) => {
     const token = await getKeyValue(TOKEN_DICTIONARY.token);
