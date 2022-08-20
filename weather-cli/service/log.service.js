@@ -21,4 +21,19 @@ const printHelp = () => {
     )
 }
 
+export const printWeather = (res, icon) => {
+    console.log(
+        dedent(`${getColor("yellow", 'Weather: ', 30)}
+        Погода в городе ${res.name}:
+        ${icon} ${res.weather[0].description}
+
+        Температура: ${res.main.temp} (Ощущается как ${res.main.feels_like})
+
+        Влажность: ${res.main.tehumidity}%
+
+        Скорость ветре: ${res.wind.speed}
+        `)
+    )
+}
+
 export {printError, printSuccess, printHelp}

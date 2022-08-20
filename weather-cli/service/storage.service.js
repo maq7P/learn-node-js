@@ -1,5 +1,5 @@
 import { promises } from "fs";
-import { FILE_PATH_DATA } from "../constants/file";
+import { FILE_PATH_DATA } from "../constants/file.js";
 
 export const saveKeyValue = async (key, value) => {
     let data = {};
@@ -12,6 +12,7 @@ export const saveKeyValue = async (key, value) => {
     data[key] = value;
     await promises.writeFile(FILE_PATH_DATA, JSON.stringify(data));
 }
+
 
 export const getKeyValue = async (key) => {
     if(await isExsist(FILE_PATH_DATA)){

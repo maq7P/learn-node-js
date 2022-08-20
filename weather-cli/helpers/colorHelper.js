@@ -8,11 +8,11 @@ export const getEmptySpace = (count) => {
         count--;
     }
 
-    return res
+    return res;
 }
 
 export const getColor = (color, log, emptyCount = 0) => {
-    const { bgRed, bgCyan, bgGreen, bgBlack, bgBlue } = chalk;
+    const { bgRed, bgCyan, bgGreen, bgBlack, bgBlue, bgYellowBright } = chalk;
     const res = log + getEmptySpace(emptyCount);
 
     switch(color){
@@ -26,6 +26,8 @@ export const getColor = (color, log, emptyCount = 0) => {
             return bgBlack(res);
         case "blue": 
             return bgBlue(res);
+        case "yellow":
+            return bgYellowBright(res)
         default: res;
     }
 }
