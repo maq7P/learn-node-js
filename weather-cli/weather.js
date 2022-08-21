@@ -1,7 +1,7 @@
 #!/ust/bin/env node
 import { TOKEN_DICTIONARY } from "./constants/token.js";
 import { getArgs } from "./helpers/args.js";
-import { getWeather } from "./service/api.service.js";
+import { getWeather,getWeatherIcon } from "./service/api.service.js";
 import { printHelp, printError, printSuccess, printWeather } from "./service/log.service.js";
 import { getKeyValue, saveKeyValue } from "./service/storage.service.js";
 
@@ -36,7 +36,7 @@ const getForcast = async () => {
         const city = process.env.CITY || await getKeyValue(TOKEN_DICTIONARY.city)
         const weather = await getWeather(city);
 
-        printWeather(weather, weather.weather[0].icon);
+        printWeather(weather, getWeatherIcon(weather.weather[0].icon));
     } catch(e){
         const status = e?.response?.status;
 

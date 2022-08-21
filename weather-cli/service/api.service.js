@@ -16,14 +16,14 @@ export const getWeather = async (city) => {
             appid: token,
             q: city,
             lang: "ru",
-            units: "metrics"
+            units: "metric"
         }
     });
 
     return data
 }
 
-export const getIcon = (icon) => {
+export const getWeatherIcon = (icon) => {
     switch(icon.slice(0, -1)){
         case "01":
             return "🌞"

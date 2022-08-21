@@ -16,21 +16,18 @@ const printHelp = () => {
          -s [City] для установки города 
          -h для вывода помощи
          -t [API_KEY] для сохранения токена
-         ${getColor("cyan", '', 36)}
         `)
     )
 }
 
 export const printWeather = (res, icon) => {
+    console.log(res)
     console.log(
-        dedent(`${getColor("yellow", 'Weather: ', 30)}
+        dedent(`${getColor("yellow", 'Weather:')}
         Погода в городе ${res.name}:
-        ${icon} ${res.weather[0].description}
-
+        ${icon} ${icon} ${icon} ${res.weather[0].description}
         Температура: ${res.main.temp} (Ощущается как ${res.main.feels_like})
-
-        Влажность: ${res.main.tehumidity}%
-
+        Влажность: ${res.main.humidity}%
         Скорость ветре: ${res.wind.speed}
         `)
     )
