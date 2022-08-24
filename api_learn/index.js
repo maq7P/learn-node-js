@@ -1,25 +1,26 @@
-import http from "http";
+import express from "express";
 
-const host = "127.0.0.1";
+import { userRouter } from "./users/user";
+
 const port = 8000;
+const app = express();
 
-const server = http.createServer((req,res) => {
-    req.url;
-
-    switch(req.method){
-        case "GET":
-            switch(req.url){
-                case "/hello":
-                    res.statusCode = 200;
-                    res.setHeader("Content-Type", "text/plain");
-                    res.end("Answer");
-                    break;
-            }
-            break;
-    }
-
+app.use((req,res, next) => {
+    console.log("Время: ", Date.now());
+    next();
 });
 
-server.listen(port, host, () => {
+app.get("/hello", (req,res) => {
+    res.end()
+});
+
+app.use("/user", userRouter);
+
+app.use((err, req, res, next) => {
+    console.log(err.message);
+    res.status(500);
+});
+
+app.listen(port, () => {
     console.log(`liistening on ${port}:${host}`);
-})
+});
