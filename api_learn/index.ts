@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 
 import { userRouter } from "./users/user";
 
@@ -16,11 +16,11 @@ app.get("/hello", (req,res) => {
 
 app.use("/user", userRouter);
 
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.log(err.message);
     res.status(500);
 });
 
 app.listen(port, () => {
-    console.log(`liistening on ${port}:${host}`);
+    console.log(`liistening on ${port}`);
 });

@@ -2,8 +2,9 @@ import express from "express";
 
 const userRouter = express.Router();
 
-userRouter.use(() => {
-
+userRouter.use((req,res,next) => {
+    console.log("Обработчик users");
+    next();
 });
 
 userRouter.get("/login", (req, res) => {
@@ -13,3 +14,5 @@ userRouter.get("/login", (req, res) => {
 userRouter.post("/register", (req, res) => {
     res.send("register")
 });
+
+export { userRouter }
