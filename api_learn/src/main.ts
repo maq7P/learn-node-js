@@ -1,10 +1,10 @@
 import { App } from "./app";
-import { userRouter } from "./users/user";
+import { LoggerService } from "./logger/loger.service";
 
 async function bootstrap() {
-    const app = new App();
+    const app = new App(new LoggerService());
     await app.init();
-    app.useRoutes(userRouter)
+    app.useRoutes()
 }
 
 bootstrap();
