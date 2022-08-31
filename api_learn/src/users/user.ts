@@ -2,7 +2,7 @@ import express from "express";
 
 const userRouter = express.Router();
 
-userRouter.use((req,res,next) => {
+userRouter.use((req, res, next) => {
     console.log("Обработчик users");
     next();
 });
