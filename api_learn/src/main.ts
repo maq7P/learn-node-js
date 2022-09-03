@@ -1,10 +1,12 @@
+import { UserController } from './users/users.controller';
 import { App } from "./app";
 import { LoggerService } from "./logger/loger.service";
 
 async function bootstrap() {
-    const app = new App(new LoggerService());
+    const logger = new LoggerService();
+    const app = new App(logger, new UserController(logger));
+
     await app.init();
-    app.useRoutes()
 }
 
 bootstrap();
