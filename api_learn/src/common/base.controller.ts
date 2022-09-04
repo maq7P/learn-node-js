@@ -33,6 +33,8 @@ export abstract class BaseController {
             const { method, foo, path } = route;
             const hanlder = foo.bind(this);
 
+            this.logger.log(`${method}: ${path}`);
+
             this.router[method](path, hanlder);
         }
     }
