@@ -1,10 +1,11 @@
+import { ILogger } from './logger.interface';
 import { Logger } from "tslog";
 
-export class LoggerService {
-    private loger: Logger
+export class LoggerService implements ILogger {
+    public logger
 
     constructor(){
-        this.loger = new Logger({
+        this.logger = new Logger({
             displayInstanceName: false,
             displayLoggerName: false,
             displayFilePath: "hidden",
@@ -13,14 +14,14 @@ export class LoggerService {
     }
 
     log(...args: unknown[]){
-        this.loger.info(...args)
+        this.logger.info(...args)
     }
 
     error(...args: unknown[]){
-        this.loger.error(...args)
+        this.logger.error(...args)
     }
 
     warn(...args: unknown[]){
-        this.loger.warn(...args)
+        this.logger.warn(...args)
     }
 }
