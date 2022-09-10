@@ -1,11 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import "reflect-metadata";
 
-import { LoggerService } from './../logger/loger.service';
+import { TYPES } from './../../types';
+
+import { ILogger } from './../logger/logger.interface';
+
 import { BaseController } from "../common/base.controller";
 
+
+@injectable()
 export class UserController extends BaseController{
-    constructor(logger: LoggerService){
-        super(logger);
+    constructor(@inject(TYPES.ILogger) private loggerServise: ILogger){
+        super(loggerServise);
 
         this.bindRoutes([
             {path: "/register", method: "post", foo: this.register},
@@ -16,6 +23,7 @@ export class UserController extends BaseController{
     login(req: Request, res: Response, next: NextFunction){
         this.ok(res, "login")
     }
+    
     register(req: Request, res: Response, next: NextFunction){
         this.ok(res, "register")
     }

@@ -11,11 +11,7 @@ function Injectable(key: string){
 
 function Inject(key: string){
 
-    return (
-        target: Object, 
-        propertyKey: string,
-        propertyDescriptor: PropertyDescriptor
-    ) => {
+    return (target: Object, propertyKey: string) => {
         Reflect.defineMetadata(key, 1, target);
         const meta = Reflect.getMetadata(key, target);
         console.log(meta);
@@ -31,6 +27,7 @@ export class C {
 
 @Injectable("D")
 export class D {
+    //@ts-ignore
     constructor(@Inject("C") c: C){
 
     }
