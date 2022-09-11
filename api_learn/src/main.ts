@@ -1,4 +1,4 @@
-import { Container } from "inversify";
+import { Container, interfaces, ContainerModule } from "inversify";
 
 import { TYPES } from './../types';
 
@@ -12,14 +12,21 @@ import { ILogger } from './logger/logger.interface';
 import { ExeptionFilter } from './errors/exeption.filter';
 
 
-const appContainer = new Container();
+const modules = new ContainerModule((bind: interfaces.Bind) => {
+    bind<ILogger>(TYPES.ILogger).to(LoggerService);
+    bind<UserController>(TYPES.IUserController).to(UserController);
+    bind<ExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
+    bind<App>(TYPES.Application).to(App);
+})
 
-appContainer.bind<ILogger>(TYPES.ILogger).to(LoggerService);
-appContainer.bind<UserController>(TYPES.UserController).to(UserController);
-appContainer.bind<ExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
-appContainer.bind<App>(TYPES.Application).to(App);
+const bootstrap = () => {
+    const appContainer = new Container();
+    appContainer.load(modules);
 
-const app = appContainer.get<App>(TYPES.Application);
-app.init();
+    const app = appContainer.get<App>(TYPES.Application);
+    app.init();
 
-export { app, appContainer }
+    return { app, appContainer }
+}
+
+export const { app, appContainer } = bootstrap();

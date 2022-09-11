@@ -5,12 +5,13 @@ import "reflect-metadata";
 import { TYPES } from './../../types';
 
 import { ILogger } from './../logger/logger.interface';
-
 import { BaseController } from "../common/base.controller";
+
+import { IUserController } from './user.controller.interface';
 
 
 @injectable()
-export class UserController extends BaseController{
+export class UserController extends BaseController implements IUserController{
     constructor(@inject(TYPES.ILogger) private loggerServise: ILogger){
         super(loggerServise);
 
