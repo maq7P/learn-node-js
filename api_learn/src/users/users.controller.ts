@@ -21,6 +21,7 @@ export class UserController extends BaseController implements IUserController {
 	}
 
 	login(req: Request, res: Response, next: NextFunction) {
+		console.log("rs");
 		this.ok(res, "login");
 	}
 
