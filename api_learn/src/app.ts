@@ -1,3 +1,5 @@
+import { IUserController } from "./users/user.controller.interface";
+import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import express, { Express } from "express";
 import { inject, injectable } from "inversify";
 import "reflect-metadata";
@@ -8,9 +10,6 @@ import { TYPES } from "./../types";
 
 import { ILogger } from "./logger/logger.interface";
 
-import { ExeptionFilter } from "./errors/exeption.filter";
-import { UserController } from "./users/users.controller";
-
 @injectable()
 export class App {
 	app: Express;
@@ -19,8 +18,8 @@ export class App {
 
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
-		@inject(TYPES.UserController) private userController: UserController,
-		@inject(TYPES.ExeptionFilter) private exeptionFilter: ExeptionFilter,
+		@inject(TYPES.UserController) private userController: IUserController,
+		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
 	) {
 		this.app = express();
 		this.port = 8000;
@@ -35,7 +34,7 @@ export class App {
 	}
 
 	useExeptionFilter(): void {
-		this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter) as any);
+		this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
 	}
 
 	public async init(): Promise<void> {

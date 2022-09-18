@@ -38,8 +38,6 @@ export class UserController extends BaseController implements IUserController {
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		console.log("this.userService: ", this.userService);
-
 		const newUser = null;
 
 		if (!newUser) {
