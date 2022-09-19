@@ -10,10 +10,10 @@ import { IUserService } from "./users.service.interface";
 @injectable()
 export class UserService implements IUserService {
 	public async createUser(dto: UserRegisterDto): Promise<User | null> {
-		const newUser = new User(dto.name, dto.email);
-		console.log(dto.name, dto.email);
+		const { name, email, password } = dto;
+		const newUser = new User(name, email);
 
-		await newUser.setPassword(dto.password);
+		await newUser.setPassword(password);
 
 		//check user exist
 		//if have - null

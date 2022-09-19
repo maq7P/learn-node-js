@@ -19,7 +19,7 @@ import { IUserService } from "./users.service.interface";
 export class UserController extends BaseController implements IUserController {
 	constructor(
 		@inject(TYPES.ILogger) private loggerServise: ILogger,
-		@inject(TYPES.ILogger) private userService: IUserService,
+		@inject(TYPES.UserService) private userService: IUserService,
 	) {
 		super(loggerServise);
 
@@ -38,12 +38,12 @@ export class UserController extends BaseController implements IUserController {
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		const newUser = null;
+		const newUser = await this.userService.createUser(body);
 
 		if (!newUser) {
 			return next(new HttpError(422, "Такой пользователь уже существует"));
 		}
 
-		this.ok(res, newUser);
+		this.ok(res, { email: newUser.email, name: newUser.name });
 	}
 }
