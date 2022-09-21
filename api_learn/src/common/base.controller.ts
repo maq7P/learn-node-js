@@ -33,11 +33,16 @@ export abstract class BaseController {
 	}
 
 	protected bindRoutes(routes: IControllerRoute[]) {
-		for (const { method, foo, path, middlewares } of routes) {
-			const hanlder = foo.bind(this);
+		for (const { method, fx, path, middlewares } of routes) {
+			const hanlder = fx.bind(this);
+
+			console.log("all: ", { method, fx, path, middlewares });
+
 			const pipline = middlewares
 				? [...middlewares.map((middleware) => middleware.execute.bind(this)), hanlder]
 				: hanlder;
+
+			console.log("cur pipline: ", pipline);
 
 			this.router[method](path, pipline);
 

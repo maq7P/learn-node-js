@@ -7,6 +7,7 @@ import { TYPES } from "./../../types";
 import { ILogger } from "./../logger/logger.interface";
 
 import { BaseController } from "../common/base.controller";
+import { ValidateMiddleware } from "./../common/middleware/middleware.validate";
 
 import { HttpError } from "./../errors/http-error.class";
 
@@ -24,8 +25,13 @@ export class UserController extends BaseController implements IUserController {
 		super(loggerServise);
 
 		this.bindRoutes([
-			{ path: "/register", method: "post", foo: this.register },
-			{ path: "/login", method: "post", foo: this.login },
+			{
+				path: "/register",
+				method: "post",
+				fx: this.register,
+				middlewares: [new ValidateMiddleware(UserRegisterDto)],
+			},
+			{ path: "/login", method: "post", fx: this.login },
 		]);
 	}
 

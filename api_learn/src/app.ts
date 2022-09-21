@@ -6,7 +6,7 @@ import "reflect-metadata";
 import { Server } from "http";
 import { json } from "body-parser";
 
-import { TYPES } from "./../types";
+import { TYPES } from "./types";
 
 import { ILogger } from "./logger/logger.interface";
 

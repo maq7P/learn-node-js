@@ -1,6 +1,6 @@
 import { Container, interfaces, ContainerModule } from "inversify";
 
-import { TYPES } from "./../types";
+import { TYPES } from "./types";
 
 import { App } from "./app";
 
@@ -15,9 +15,13 @@ import { ILogger } from "./logger/logger.interface";
 import { ExeptionFilter } from "./errors/exeption.filter";
 import { IExeptionFilter } from "./errors/exeption.filter.interface";
 
+import { IConfigService } from "./config/config.service.interface";
+import { ConfigService } from "./config/config.service";
+
 const modules = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
+	bind<IConfigService>(TYPES.ConfigService).to(ConfigService);
 
 	bind<IUserController>(TYPES.UserController).to(UserController);
 	bind<IUserService>(TYPES.UserService).to(UserService);
