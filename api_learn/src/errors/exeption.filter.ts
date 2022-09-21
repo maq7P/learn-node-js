@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 import "reflect-metadata";
 
 import { ILogger } from "./../logger/logger.interface";
-import { TYPES } from "./../../types";
+import { TYPES } from "../types";
 
 import { HttpError } from "./http-error.class";
 import { IExeptionFilter } from "./exeption.filter.interface";

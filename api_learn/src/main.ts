@@ -19,14 +19,14 @@ import { IConfigService } from "./config/config.service.interface";
 import { ConfigService } from "./config/config.service";
 
 const modules = new ContainerModule((bind: interfaces.Bind) => {
-	bind<ILogger>(TYPES.ILogger).to(LoggerService);
-	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
-	bind<IConfigService>(TYPES.ConfigService).to(ConfigService);
+	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
+	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter).inSingletonScope();
+	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 
-	bind<IUserController>(TYPES.UserController).to(UserController);
-	bind<IUserService>(TYPES.UserService).to(UserService);
+	bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
+	bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
 
-	bind<App>(TYPES.Application).to(App);
+	bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
 const bootstrap = () => {

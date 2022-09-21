@@ -2,7 +2,7 @@ import { config, DotenvConfigOutput, DotenvParseOutput } from "dotenv";
 import { inject, injectable } from "inversify";
 
 import { ILogger } from "./../logger/logger.interface";
-import { TYPES } from "./../../types";
+import { TYPES } from "../types";
 
 import { IConfigService } from "./config.service.interface";
 
@@ -14,7 +14,7 @@ export class ConfigService implements IConfigService {
 		const dotenvOut: DotenvConfigOutput = config();
 
 		if (dotenvOut.error) {
-			this.logger.error("Не удалось прочитать файл .env или он отсутствует");
+			this.logger.error("[ConfigService] Не удалось прочитать файл .env или он отсутствует");
 		} else {
 			this.config = dotenvOut.parsed as DotenvParseOutput;
 		}

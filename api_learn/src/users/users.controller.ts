@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { inject, injectable } from "inversify";
 import "reflect-metadata";
 
-import { TYPES } from "./../../types";
+import { TYPES } from "../types";
 
 import { ILogger } from "./../logger/logger.interface";
 
