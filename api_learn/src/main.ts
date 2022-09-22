@@ -4,6 +4,8 @@ import { TYPES } from "./types";
 
 import { App } from "./app";
 
+import { PrismaService } from "./database/prisma.service";
+
 import { UserController } from "./users/users.controller";
 import { IUserController } from "./users/user.controller.interface";
 import { IUserService } from "./users/users.service.interface";
@@ -22,6 +24,8 @@ const modules = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter).inSingletonScope();
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+	
+	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 
 	bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
 	bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
