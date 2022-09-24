@@ -1,7 +1,9 @@
+import { inject, injectable } from "inversify";
+import { UserModel } from "@prisma/client";
+
 import { PrismaService } from "./../database/prisma.service";
 import { TYPES } from "./../types";
-import { UserModel } from "@prisma/client";
-import { inject, injectable } from "inversify";
+
 import { User } from "./user.entity";
 import { IUsersRepository } from "./user.repository.interface";
 
@@ -18,7 +20,7 @@ export class UsersRepository implements IUsersRepository {
 		});
 	}
 
-	async find({ email }: User): Promise<UserModel | null> {
+	async find({ email }: Pick<User, "email">): Promise<UserModel | null> {
 		return await this.prismaService.client.userModel.findFirst({
 			where: {
 				email,

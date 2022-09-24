@@ -36,13 +36,9 @@ export abstract class BaseController {
 		for (const { method, fx, path, middlewares } of routes) {
 			const hanlder = fx.bind(this);
 
-			console.log("all: ", { method, fx, path, middlewares });
-
 			const pipline = middlewares
 				? [...middlewares.map((middleware) => middleware.execute.bind(this)), hanlder]
 				: hanlder;
-
-			console.log("cur pipline: ", pipline);
 
 			this.router[method](path, pipline);
 
