@@ -9,7 +9,7 @@ import { ILogger } from "./../logger/logger.interface";
 import { IConfigService } from "./../config/config.service.interface";
 
 import { BaseController } from "../common/base.controller";
-import { ValidateMiddleware } from "./../common/middleware/middleware.validate";
+import { ValidateMiddleware } from "../common/middleware/validate.middleware";
 
 import { HttpError } from "./../errors/http-error.class";
 
@@ -39,6 +39,11 @@ export class UserController extends BaseController implements IUserController {
 				method: "post",
 				fx: this.login,
 				middlewares: [new ValidateMiddleware(UserLoginDto)],
+			},
+			{
+				path: "/info",
+				method: "get",
+				fx: this.login,
 			},
 		]);
 	}
@@ -71,6 +76,14 @@ export class UserController extends BaseController implements IUserController {
 		}
 
 		this.ok(res, { email: newUser.email, name: newUser.name });
+	}
+
+	async info(
+		{ user }: Request<{}, {}, UserLoginDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		this.ok(res, { email: user });
 	}
 
 	async #signJWT(email: string, secret: string): Promise<string> {
