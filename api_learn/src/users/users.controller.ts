@@ -43,7 +43,8 @@ export class UserController extends BaseController implements IUserController {
 			{
 				path: "/info",
 				method: "get",
-				fx: this.login,
+				fx: this.info,
+				middlewares: [],
 			},
 		]);
 	}
@@ -69,6 +70,8 @@ export class UserController extends BaseController implements IUserController {
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
+		console.log(this.userService.createUser);
+
 		const newUser = await this.userService.createUser(body);
 
 		if (!newUser) {

@@ -1,4 +1,3 @@
-import { hash } from "bcryptjs";
 import { inject, injectable } from "inversify";
 import { UserModel } from "@prisma/client";
 
@@ -16,8 +15,7 @@ import { IUserService } from "./users.service.interface";
 export class UserService implements IUserService {
 	constructor(@inject(TYPES.UsersRepository) private userRepository: UsersRepository) {}
 
-	public async createUser(dto: UserRegisterDto): Promise<UserModel | null> {
-		const { name, email, password } = dto;
+	public async createUser({ name, email, password }: UserRegisterDto): Promise<UserModel | null> {
 		const newUser = new User(name, email);
 
 		await newUser.setPassword(password);

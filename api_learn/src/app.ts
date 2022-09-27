@@ -33,8 +33,8 @@ export class App {
 	useMiddleware(): void {
 		this.app.use(json());
 
-		const authMiddleware = new AuthMiddleware(this.configService.get("SECRET"));
-		this.app.use(authMiddleware.execute.bind(this));
+		const mwAuth = new AuthMiddleware(this.configService.get("SECRET"));
+		this.app.use(mwAuth.execute.bind(mwAuth));
 	}
 
 	useRoutes(): void {

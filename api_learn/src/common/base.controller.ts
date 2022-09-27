@@ -37,7 +37,7 @@ export abstract class BaseController {
 			const hanlder = fx.bind(this);
 
 			const pipline = middlewares
-				? [...middlewares.map((middleware) => middleware.execute.bind(this)), hanlder]
+				? [...middlewares.map((middleware) => middleware.execute.bind(middleware)), hanlder]
 				: hanlder;
 
 			this.router[method](path, pipline);

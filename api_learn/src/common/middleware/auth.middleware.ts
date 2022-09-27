@@ -4,25 +4,22 @@ import { verify } from "jsonwebtoken";
 import { IMiddleware } from "./validate.middleware.interface";
 
 export class AuthMiddleware implements IMiddleware {
-	constructor(private _secret: string) {}
+	constructor(private secret: string) {}
 
-	execute(req: Request, res: Response, next: NextFunction) {
+	execute(req: Request, res: Response, next: NextFunction): void {
 		const authHeader = req.headers.authorization;
 
 		if (authHeader) {
 			const token = authHeader.split(" ")[1];
-			verify(token, this._secret, (err, payload) => {
+
+			verify(token, this.secret, (err, payload: any) => {
 				if (err) next();
 
-				console.log("payload: ", payload);
-
 				if (payload) {
-					req.user = payload + "";
+					req.user = payload?.email;
 					next();
 				}
 			});
-		}
-
-		next();
+		} else next();
 	}
 }
