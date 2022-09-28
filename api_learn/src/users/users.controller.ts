@@ -8,8 +8,10 @@ import { TYPES } from "../types";
 import { ILogger } from "./../logger/logger.interface";
 import { IConfigService } from "./../config/config.service.interface";
 
+import { AuthGuard } from "./../common/middleware/auth/auth.guard";
+
 import { BaseController } from "../common/base.controller";
-import { ValidateMiddleware } from "../common/middleware/validate.middleware";
+import { ValidateMiddleware } from "../common/middleware/validate/validate.middleware";
 
 import { HttpError } from "./../errors/http-error.class";
 
@@ -44,7 +46,7 @@ export class UserController extends BaseController implements IUserController {
 				path: "/info",
 				method: "get",
 				fx: this.info,
-				middlewares: [],
+				middlewares: [new AuthGuard()],
 			},
 		]);
 	}
