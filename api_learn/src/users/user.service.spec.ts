@@ -35,6 +35,7 @@ beforeAll(() => {
 	configService = container.get<IConfigService>(TYPES.ConfigService);
 });
 
+let createdUser: UserModel | null;
 describe("User service", () => {
 	it("create user", async () => {
 		configService.get = jest.fn().mockReturnValue("1");
@@ -47,7 +48,7 @@ describe("User service", () => {
 			}),
 		);
 
-		const createdUser = await userService.createUser({
+		createdUser = await userService.createUser({
 			email: "a@a.ru",
 			name: "Test",
 			password: "1",
