@@ -1,5 +1,5 @@
 import { IConfigService } from "./config/config.service.interface";
-import { AuthMiddleware } from "./common/middleware/auth.middleware";
+import { AuthMiddleware } from "./common/middleware/auth/auth.middleware";
 import express, { Express } from "express";
 import { inject, injectable } from "inversify";
 import "reflect-metadata";
